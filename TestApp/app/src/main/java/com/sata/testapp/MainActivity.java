@@ -11,8 +11,9 @@ public class MainActivity extends AppCompatActivity {
     private Button button;
     private Button button1;
     private GPSTracker gps;
-    private TextView textView;
-    private TextView textView1;
+    private TextView lattitudeField;
+    private TextView longitudeField;
+    private TextView geoPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,8 +22,9 @@ public class MainActivity extends AppCompatActivity {
 
         button = (Button) findViewById(R.id.gpsLocationButton);
         button1 = (Button) findViewById(R.id.locationResetButton);
-        textView = (TextView) findViewById(R.id.locationTextField);
-        textView1 = (TextView) findViewById(R.id.locationTextField1);
+        lattitudeField = (TextView) findViewById(R.id.locationTextField);
+        longitudeField = (TextView) findViewById(R.id.locationTextField1);
+        geoPosition = (TextView) findViewById(R.id.locationTextField2);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -33,8 +35,9 @@ public class MainActivity extends AppCompatActivity {
                     double lattitude = gps.getLattitude();
                     double longitude = gps.getLongitude();
 
-                    textView.setText("Lat: " + lattitude);
-                    textView1.setText("Lon: " + longitude);
+                    lattitudeField.setText("Lat: " + lattitude);
+                    longitudeField.setText("Lon: " + longitude);
+                    geoPosition.setText(gps.getGeoLocation(lattitude,longitude));
                 }
             }
         });
@@ -42,8 +45,9 @@ public class MainActivity extends AppCompatActivity {
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                textView.setText("");
-                textView1.setText("");
+                lattitudeField.setText("");
+                longitudeField.setText("");
+                geoPosition.setText("");
             }
         });
     }
