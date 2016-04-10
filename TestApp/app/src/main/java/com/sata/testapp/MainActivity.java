@@ -1,41 +1,50 @@
 package com.sata.testapp;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+
+    private Button button;
+    private Button button1;
+    private GPSTracker gps;
+    private TextView textView;
+    private TextView textView1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
+        button = (Button) findViewById(R.id.gpsLocationButton);
+        button1 = (Button) findViewById(R.id.locationResetButton);
+        textView = (TextView) findViewById(R.id.locationTextField);
+        textView1 = (TextView) findViewById(R.id.locationTextField1);
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gps = new GPSTracker(MainActivity.this);
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+                if(gps.canGetLocation()){
+                    double lattitude = gps.getLattitude();
+                    double longitude = gps.getLongitude();
 
-        return super.onOptionsItemSelected(item);
+                    textView.setText("Lat: " + lattitude);
+                    textView1.setText("Lon: " + longitude);
+                }
+            }
+        });
+
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                textView.setText("");
+                textView1.setText("");
+            }
+        });
     }
 }
