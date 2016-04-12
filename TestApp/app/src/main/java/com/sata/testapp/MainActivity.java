@@ -6,12 +6,33 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+import com.sata.testapp.classes.User;
 
-    private Button button;
+public class MainActivity extends AppCompatActivity {
+    private User user;
+    private TextView userDataField;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        this.user = User.createUser(this);
+        this.userDataField = (TextView) findViewById(R.id.userDataField);
+
+        this.userDataField.setText(
+                this.user.getLatString() +
+                this.user.getLonString() +
+                "this.user.getSomethingElse() xD"
+        );
+    }
+
+
+    // EXAMPLE [Button]: SHOW USER LOCATION
+    /*private Button button;
     private Button button1;
     private GPSTracker gps;
-    private TextView lattitudeField;
+    private TextView latitudeField;
     private TextView longitudeField;
     private TextView geoPosition;
 
@@ -22,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
         button = (Button) findViewById(R.id.gpsLocationButton);
         button1 = (Button) findViewById(R.id.locationResetButton);
-        lattitudeField = (TextView) findViewById(R.id.locationTextField);
+        latitudeField = (TextView) findViewById(R.id.locationTextField);
         longitudeField = (TextView) findViewById(R.id.locationTextField1);
         geoPosition = (TextView) findViewById(R.id.locationTextField2);
 
@@ -35,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                     double lattitude = gps.getLattitude();
                     double longitude = gps.getLongitude();
 
-                    lattitudeField.setText("Lat: " + lattitude);
+                    latitudeField.setText("Lat: " + lattitude);
                     longitudeField.setText("Lon: " + longitude);
                     geoPosition.setText(gps.getGeoLocation(lattitude,longitude));
                 }
@@ -45,10 +66,10 @@ public class MainActivity extends AppCompatActivity {
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                lattitudeField.setText("");
+                latitudeField.setText("");
                 longitudeField.setText("");
                 geoPosition.setText("");
             }
         });
-    }
+    }*/
 }

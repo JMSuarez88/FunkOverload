@@ -45,10 +45,11 @@ public class GPSTracker extends Service implements LocationListener {
 
     public Location getLocation() {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_NETWORK_STATE) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(new Activity(),new String[]{
                         Manifest.permission.ACCESS_FINE_LOCATION,
                         Manifest.permission.ACCESS_COARSE_LOCATION,
+                        Manifest.permission.ACCESS_NETWORK_STATE,
                         Manifest.permission.INTERNET
                 },10);
             }
@@ -68,7 +69,8 @@ public class GPSTracker extends Service implements LocationListener {
 
                 if (isNetworkEnabled) {
                     locationManager.requestLocationUpdates(
-                            LocationManager.NETWORK_PROVIDER,
+                            LocationManager.GPS_PROVIDER,
+                            //LocationManager.NETWORK_PROVIDER,
                             MIN_DISTANCE_CHANGE_FOR_UPDATES,
                             MIN_TIME_BW_UPDATES,
                             this);
@@ -87,13 +89,14 @@ public class GPSTracker extends Service implements LocationListener {
                 if (isGPSEnabled) {
                     if (this.location == null) {
                         locationManager.requestLocationUpdates(
-                                LocationManager.NETWORK_PROVIDER,
+                                LocationManager.GPS_PROVIDER,
+                                //LocationManager.NETWORK_PROVIDER,
                                 MIN_DISTANCE_CHANGE_FOR_UPDATES,
                                 MIN_TIME_BW_UPDATES,
                                 this);
 
                         if (locationManager != null) {
-                            this.location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                            this.location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
                             if (location != null) {
                                 this.lattitude = location.getLatitude();
@@ -115,14 +118,13 @@ public class GPSTracker extends Service implements LocationListener {
     public void stopUsingGPS() {
         if (locationManager != null) {
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED) {
-                        ActivityCompat.requestPermissions(new Activity(),new String[]{
-                                Manifest.permission.ACCESS_FINE_LOCATION,
-                                Manifest.permission.ACCESS_COARSE_LOCATION,
-                                Manifest.permission.INTERNET
-                        },10);
-                    }
+                if (ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_NETWORK_STATE) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(new Activity(),new String[]{
+                            Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.ACCESS_COARSE_LOCATION,
+                            Manifest.permission.ACCESS_NETWORK_STATE,
+                            Manifest.permission.INTERNET
+                    },10);
                 }
             }
             locationManager.removeUpdates(GPSTracker.this);
