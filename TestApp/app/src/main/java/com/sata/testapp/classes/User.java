@@ -1,15 +1,16 @@
 package com.sata.testapp.classes;
 
 import android.content.Context;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
-import android.os.Parcel;
-import android.os.UserHandle;
-
-import com.sata.testapp.GPSTracker;
+import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by kaotiks on 11/04/16.
  */
+ 
 public class User {
     // Attributes
     private static User instance = null;
@@ -38,17 +39,32 @@ public class User {
             return null;
         }
     }
-
+    
+    // Getters
+    public int getId(){
+		return this.id;
+	}
+    public double getLat() {
+        return this.lat;
+    }
+    public double getLon() {
+        return this.lon;
+    }
     public String getLatString() {
-        return "Latitude: " + lat + "\n";
+        return "Latitude: " + this.lat + "\n";
     }
-
     public String getLonString() {
-        return "Longitude: " + lon + "\n";
+        return "Longitude: " + this.lon + "\n";
+    }
+    
+    // Display the user geo location (city, state, country)
+    public String getCity(double lat, double lon){
+        return this.gps.getGeoLocation(lat,lon);
     }
 
+    // Setup user location (longitude, latitude)
     private void setupUserLocation(GPSTracker gps){
-        this.lat = gps.getLattitude();
-        this.lon = gps.getLongitude();
+        this.lat = this.gps.getLattitude();
+        this.lon = this.gps.getLongitude();
     }
 }

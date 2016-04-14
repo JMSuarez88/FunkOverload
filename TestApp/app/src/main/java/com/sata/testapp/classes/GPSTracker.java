@@ -1,4 +1,4 @@
-package com.sata.testapp;
+package com.sata.testapp.classes;
 
 import android.Manifest;
 import android.app.Activity;
@@ -8,6 +8,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -18,31 +20,48 @@ import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 
+import java.util.List;
+
 /**
  * Created by kaotiks on 10/04/16.
  */
+ 
 public class GPSTracker extends Service implements LocationListener {
+    // Attributes
     private final Context context;
-
-    boolean isGPSEnabled = false;
-    boolean isNetworkEnabled = false;
-    boolean canGetLocation = false;
-
-    double lattitude;
-    double longitude;
-
+    private boolean isGPSEnabled = false;
+    private boolean isNetworkEnabled = false;
+    private boolean canGetLocation = false;
+    private double lattitude;
+    private double longitude;
     private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 1;
     private static final long MIN_TIME_BW_UPDATES = 1000 * 10;
-
     protected LocationManager locationManager;
     private Location location;
+    private Geocoder geo;
 
+    // Constructor
     public GPSTracker(Context context) {
         this.context = context;
+        this.geo = new Geocoder(context);
         this.getLocation();
     }
 
-
+	// Getters
+	public double getLattitude(){
+        if(location != null){
+            this.lattitude = location.getLatitude();
+        }
+        return this.lattitude;
+    }
+    public double getLongitude(){
+        if(location != null){
+            this.longitude = location.getLongitude();
+        }
+        return this.longitude;
+    }
+    // Get the user Location (lat, lon)
+    // toDo: improve this section in order to open GPS/NETWORK settings if disabled
     public Location getLocation() {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_NETWORK_STATE) != PackageManager.PERMISSION_GRANTED) {
@@ -114,7 +133,25 @@ public class GPSTracker extends Service implements LocationListener {
 
         return location;
     }
-
+    
+    // Return the user geo location (city, state, country)
+    public String getGeoLocation(double lat, double lon){
+		List<Address> addresses;
+        String city, state, country;
+        try {
+            addresses = geo.getFromLocation(lat,lon,1);
+            city = addresses.get(0).getAddressLine(1);
+            state = addresses.get(0).getAddressLine(2);
+            country = addresses.get(0).getAddressLine(3);
+            System.out.println(addresses);
+            return city + ", " + state + ", " + country;
+        } catch (Exception e){
+            e.printStackTrace();
+            return "Geocoder not working";
+        }
+    }
+    
+    // Not sure what it does
     public void stopUsingGPS() {
         if (locationManager != null) {
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -131,20 +168,7 @@ public class GPSTracker extends Service implements LocationListener {
         }
     }
 
-    public double getLattitude(){
-        if(location != null){
-            this.lattitude = location.getLatitude();
-        }
-        return this.lattitude;
-    }
-
-    public double getLongitude(){
-        if(location != null){
-            this.longitude = location.getLongitude();
-        }
-        return this.longitude;
-    }
-
+    
     public boolean canGetLocation(){
         return this.canGetLocation;
     }
@@ -173,10 +197,7 @@ public class GPSTracker extends Service implements LocationListener {
         alertDialog.show();
     }
 
-    public String getGeoLocation(double lat, double lon){
-
-        return "[Hardcoded] Junin - Buenos Aires - Argentina";
-    }
+    
 
     @Override
     public void onLocationChanged(Location location) {

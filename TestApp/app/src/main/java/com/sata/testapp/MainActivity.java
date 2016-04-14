@@ -21,9 +21,9 @@ public class MainActivity extends AppCompatActivity {
         this.userDataField = (TextView) findViewById(R.id.userDataField);
 
         this.userDataField.setText(
-                this.user.getLatString() +
-                this.user.getLonString() +
-                "this.user.getSomethingElse() xD"
+                /*this.user.getLatString() +
+                this.user.getLonString() +*/
+                this.user.getCity(user.getLat(),user.getLon())
         );
     }
 
