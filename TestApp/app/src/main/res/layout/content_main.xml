@@ -15,7 +15,7 @@
         android:textAlignment="center"
         android:textStyle="bold"
         android:textSize="29dp"
-        android:text="CLEAR FOR TAKE OFF"
+        android:text="@string/project_name"
         android:id="@+id/ctfo"
         android:layout_above="@+id/ta" />
 
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textSize="25dp"
-        android:text="TEST APPLICATION"
+        android:text="@string/test_app"
         android:id="@+id/ta"
         android:layout_above="@+id/locationTextField" />
 

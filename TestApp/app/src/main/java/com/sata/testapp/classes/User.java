@@ -1,11 +1,7 @@
 package com.sata.testapp.classes;
 
 import android.content.Context;
-import android.location.Address;
-import android.location.Geocoder;
 import android.location.Location;
-import java.util.List;
-import java.util.Locale;
 
 /**
  * Created by kaotiks on 11/04/16.
@@ -15,18 +11,19 @@ public class User {
     // Attributes
     private static User instance = null;
     private Location userLocation;
-    private int id;
     private double lat;
     private double lon;
     private String city;
     private String state;
     private String country;
-    private GPSTracker gps;
+    private GPS gps;
 
     // Private constructor for Singleton
     private User(Context context) {
-        this.gps = new GPSTracker(context);
-        this.setupUserLocation(gps);
+        this.gps = new GPS(context);
+        //this.userLocation = this.gps.getLocation();
+        this.lat = this.gps.getLatitude();
+        this.lon = this.gps.getLongitude();
     }
 
     // Method for User creation (allow just one instance of User across the app)
@@ -41,9 +38,6 @@ public class User {
     }
     
     // Getters
-    public int getId(){
-		return this.id;
-	}
     public double getLat() {
         return this.lat;
     }
@@ -56,15 +50,13 @@ public class User {
     public String getLonString() {
         return "Longitude: " + this.lon + "\n";
     }
-    
+
     // Display the user geo location (city, state, country)
     public String getCity(double lat, double lon){
-        return this.gps.getGeoLocation(lat,lon);
+        return this.gps.getGeoLocation(lat, lon);
     }
 
-    // Setup user location (longitude, latitude)
-    private void setupUserLocation(GPSTracker gps){
-        this.lat = this.gps.getLattitude();
-        this.lon = this.gps.getLongitude();
+    public String toString(){
+        return "I'm a user";
     }
 }

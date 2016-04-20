@@ -1,4 +1,14 @@
 <resources>
-    <string name="app_name">Test App</string>
+	<string name="test"></string>
+    <string name="app_name">Muŝo</string>
+    <string name="app_description">Flight delay prediction app</string>
     <string name="action_settings">Settings</string>
+    <string name="project_name">Clear for take off</string>
+    <string name="test_app">Test application</string>
+    <string name="latitude_long_colon">Latitude:</string>
+    <string name="longitude_long_colon">Longitude:</string>
+    <string name="latitude_short_colon">Lat:</string>
+    <string name="longitude_short_colon">Lon:</string>
+    <string name="destination_airport">Destination</string>
+    <string name="change_location">Change location</string>
 </resources>

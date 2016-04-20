@@ -1,15 +1,14 @@
 package com.sata.testapp;
 
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
-import com.sata.testapp.classes.User;
+import com.sata.testapp.classes.UserData;
 
 public class MainActivity extends AppCompatActivity {
-    private User user;
+    private UserData userData;
     private TextView userDataField;
 
     @Override
@@ -17,43 +16,50 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        this.user = User.createUser(this);
-        this.userDataField = (TextView) findViewById(R.id.userDataField);
+        // Don't remember what is this for
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
 
+        // Instantiate objects
+        this.userData = new UserData(this);
+        this.userDataField = (TextView) findViewById(R.id.userDataField);
+        
+        // Set up airports
+        setupUserData("eze","tdf");
+        this.userData.getFlight().setupAirports(this.userData.getAirportFrom(),this.userData.getAirportTo());
+        
+        // Set text field content
         this.userDataField.setText(
-                /*this.user.getLatString() +
-                this.user.getLonString() +*/
-                this.user.getCity(user.getLat(),user.getLon())
+            //this.userData.getUser().toString() + "\n" +
+            //this.userData.getAirportFrom().toString() + "\n"
+                this.userData.getFlight().toString() + "\n"
+            //this.userData.getAirportTo().toString() + "\n" +
+            //this.userData.getFlight().toString()
         );
     }
 
+    public void setupUserData(String from, String to){
+        this.userData.getAirportFrom().setupAirport(from);
+        this.userData.getAirportTo().setupAirport(to);
+    }
 
-    // EXAMPLE [Button]: SHOW USER LOCATION
+
+    // EXAMPLE [Button]
     /*private Button button;
     private Button button1;
-    private GPSTracker gps;
-    private TextView latitudeField;
-    private TextView longitudeField;
-    private TextView geoPosition;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
         button = (Button) findViewById(R.id.gpsLocationButton);
         button1 = (Button) findViewById(R.id.locationResetButton);
-        latitudeField = (TextView) findViewById(R.id.locationTextField);
-        longitudeField = (TextView) findViewById(R.id.locationTextField1);
-        geoPosition = (TextView) findViewById(R.id.locationTextField2);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gps = new GPSTracker(MainActivity.this);
+                gps = new GPS(MainActivity.this);
 
                 if(gps.canGetLocation()){
-                    double lattitude = gps.getLattitude();
+                    double lattitude = gps.getLatitude();
                     double longitude = gps.getLongitude();
 
                     latitudeField.setText("Lat: " + lattitude);
