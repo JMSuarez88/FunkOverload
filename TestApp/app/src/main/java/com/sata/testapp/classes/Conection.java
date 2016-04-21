@@ -46,9 +46,9 @@ public class Conection implements Runnable{
                 ois = new ObjectInputStream(s.getInputStream());
 
                 Log.e("TCP Client", "C: Sent.");
-                UserData msj = new UserData();
-                msj.setIdMensaje(1);
-                oos.writeObject(msj);
+                UserData uData = new UserData();
+                uData.setIdMensaje(1);
+                oos.writeObject(uData);
                 Log.e("TCP Client", "C: Done.");
 
                 // receive the message which the server sends back
@@ -56,7 +56,7 @@ public class Conection implements Runnable{
                 // server
                 while (connectedCliente) {
                     try{
-                        Mensaje aux = (Mensaje)ois.readObject();
+                        UserData aux = (UserData)ois.readObject();
                         Comandos(aux);
                     }catch (Exception ex){
                         ex.printStackTrace();
@@ -94,7 +94,7 @@ public class Conection implements Runnable{
             ex.printStackTrace();
         }
     }
-    private void Comandos(Mensaje msj) {
+    private void Comandos(UserData msj) {
         switch (msj.getIdMensaje()) {
             case 1:
                 break;
