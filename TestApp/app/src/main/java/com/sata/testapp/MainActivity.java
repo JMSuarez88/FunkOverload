@@ -10,12 +10,13 @@ import com.sata.testapp.classes.UserData;
 public class MainActivity extends AppCompatActivity {
     private UserData userData;
     private TextView userDataField;
+    private Conexion cs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+	cs = new Conexion();
         // Don't remember what is this for
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
