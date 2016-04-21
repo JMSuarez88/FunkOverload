@@ -11,4 +11,5 @@
     <string name="longitude_short_colon">Lon:</string>
     <string name="destination_airport">Destination</string>
     <string name="change_location">Change location</string>
+    <string name="button_connect">Connect</string>
 </resources>

@@ -16,20 +16,15 @@ public class User {
     private String city;
     private String state;
     private String country;
-    private GPS gps;
 
     // Private constructor for Singleton
-    private User(Context context) {
-        this.gps = new GPS(context);
-        //this.userLocation = this.gps.getLocation();
-        this.lat = this.gps.getLatitude();
-        this.lon = this.gps.getLongitude();
+    private User() {
     }
 
     // Method for User creation (allow just one instance of User across the app)
-    public static User createUser(Context context){
+    public static User createUser(){
         if(instance == null) {
-            instance = new User(context);
+            instance = new User();
             return instance;
         } else {
             System.out.println("User already created");
@@ -50,10 +45,8 @@ public class User {
     public String getLonString() {
         return "Longitude: " + this.lon + "\n";
     }
-
-    // Display the user geo location (city, state, country)
-    public String getCity(double lat, double lon){
-        return this.gps.getGeoLocation(lat, lon);
+    public String getCity(){
+        return this.city;
     }
 
     public String toString(){

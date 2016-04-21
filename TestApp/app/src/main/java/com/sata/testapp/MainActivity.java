@@ -3,20 +3,25 @@ package com.sata.testapp;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
-
+import com.sata.testapp.classes.Conection;
+import com.sata.testapp.classes.GPS;
 import com.sata.testapp.classes.UserData;
 
 public class MainActivity extends AppCompatActivity {
     private UserData userData;
     private TextView userDataField;
-    private Conexion cs;
+    private Conection cs;
+    private Button buttonConnect;
+    private GPS userGps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-	cs = new Conexion();
+	    //cs = new Conection();
         // Don't remember what is this for
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -24,20 +29,31 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // Instantiate objects
-        this.userData = new UserData(this);
+        this.userData = new UserData();
         this.userDataField = (TextView) findViewById(R.id.userDataField);
+        this.buttonConnect = (Button) findViewById(R.id.buttonConnect);
+        this.userGps = new GPS(this);
         
         // Set up airports
         setupUserData("eze","tdf");
-        this.userData.getFlight().setupAirports(this.userData.getAirportFrom(),this.userData.getAirportTo());
-        
+        this.userData.getFlight().setupAirports(this.userData.getAirportFrom(), this.userData.getAirportTo());
+
+        // Button Connect
+        buttonConnect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cs = new Conection();
+            }
+        });
+
         // Set text field content
         this.userDataField.setText(
-            //this.userData.getUser().toString() + "\n" +
-            //this.userData.getAirportFrom().toString() + "\n"
-                this.userData.getFlight().toString() + "\n"
-            //this.userData.getAirportTo().toString() + "\n" +
-            //this.userData.getFlight().toString()
+                "Conecta o no conecta?"
+                //this.userData.getUser().toString() + "\n" +
+                //this.userData.getAirportFrom().toString() + "\n
+                // this.userData.getFlight().toString() + "\n"
+                //this.userData.getAirportTo().toString() + "\n" +
+                //this.userData.getFlight().toString()
         );
     }
 

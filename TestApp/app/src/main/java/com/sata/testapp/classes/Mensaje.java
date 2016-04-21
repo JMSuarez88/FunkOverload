@@ -49,5 +49,5 @@ public class Mensaje implements Serializable{
 	}
 	public void setMinutesDelay(int minutesDelay) {
 		this.minutesDelay = minutesDelay;
-	}  
+	}
 }

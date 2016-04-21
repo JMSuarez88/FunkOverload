@@ -2,19 +2,18 @@ package com.sata.testapp.classes;
 
 import android.content.Context;
 
-/**
- * Created by kaotiks on 19/04/16.
- */
+import java.io.Serializable;
 
-public class UserData {
-    // Attributes
+public class UserData implements Serializable{
+    private static final long serialVersionUID = -6374678792440967465L;
+    private int idMensaje;
     private User user;
     private Airport airportFrom;
     private Airport airportTo;
     private Flight flight;
 
-    public UserData(Context context) {
-        this.user = User.createUser(context);
+    public UserData() {
+        this.user = User.createUser();
         this.airportFrom = new Airport();
         this.airportTo = new Airport();
         this.flight = new Flight();
@@ -26,6 +25,14 @@ public class UserData {
     }
     public void setUser(User user) {
         this.user = user;
+    }
+
+    // Id Mensaje
+    public int getIdMensaje() {
+        return idMensaje;
+    }
+    public void setIdMensaje(int idMensaje) {
+        this.idMensaje = idMensaje;
     }
 
     // Airport From

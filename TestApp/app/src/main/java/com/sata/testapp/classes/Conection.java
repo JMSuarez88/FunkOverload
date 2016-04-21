@@ -1,6 +1,7 @@
 package com.sata.testapp.classes;
 
 
+import android.content.Context;
 import android.util.Log;
 import java.io.*;
 import java.net.InetAddress;
@@ -10,16 +11,17 @@ import java.net.Socket;
  * Created by klincaja on 20/04/16.
  */
 
-public class Conexion implements Runnable{
-    public static  String SERVERIP = "127.0.0.1" ; // your computer IP
-    public static final int SERVERPORT = 3535;
+public class Conection implements Runnable{
+    private final  String SERVERIP = "192.168.0.6" ; // your computer IP
+    private final int SERVERPORT = 3535;
     private ObjectOutputStream oos;
     private ObjectInputStream ois;
     private Socket s;
     private boolean connectedCliente = false;
 
 
-    public Conexion(){
+    public Conection(){
+        this.run();
     }
 
     @Override
@@ -44,7 +46,7 @@ public class Conexion implements Runnable{
                 ois = new ObjectInputStream(s.getInputStream());
 
                 Log.e("TCP Client", "C: Sent.");
-                Mensaje msj = new Mensaje();
+                UserData msj = new UserData();
                 msj.setIdMensaje(1);
                 oos.writeObject(msj);
                 Log.e("TCP Client", "C: Done.");
