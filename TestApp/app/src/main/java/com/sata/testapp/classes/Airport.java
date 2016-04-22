@@ -1,11 +1,14 @@
 package com.sata.testapp.classes;
 
+import java.io.Serializable;
+
 /**
  * Created by kaotiks on 11/04/16.
  */
  
-public class Airport {
-	// Attributes
+public class Airport implements Serializable {
+    // Attributes
+    private static final long serialVersionUID = 1L;
     private String formalName;
     private String publicName;
     private int iata;

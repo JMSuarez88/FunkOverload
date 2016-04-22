@@ -1,16 +1,15 @@
 package com.sata.testapp.classes;
 
-import android.content.Context;
-import android.location.Location;
+import java.io.Serializable;
 
 /**
  * Created by kaotiks on 11/04/16.
  */
  
-public class User {
+public class User implements Serializable {
     // Attributes
+    private static final long serialVersionUID = 1L;
     private static User instance = null;
-    private Location userLocation;
     private double lat;
     private double lon;
     private String city;
@@ -32,19 +31,27 @@ public class User {
         }
     }
     
-    // Getters
+    // Latitude
     public double getLat() {
         return this.lat;
-    }
-    public double getLon() {
-        return this.lon;
     }
     public String getLatString() {
         return "Latitude: " + this.lat + "\n";
     }
+    public void setLat(double lat){
+		this.lat = lat;
+	}
+	
+	// Longitude
+    public double getLon() {
+        return this.lon;
+    }
     public String getLonString() {
         return "Longitude: " + this.lon + "\n";
     }
+    public void setLon(double lon){
+		this.lon = lon;
+	}
     public String getCity(){
         return this.city;
     }

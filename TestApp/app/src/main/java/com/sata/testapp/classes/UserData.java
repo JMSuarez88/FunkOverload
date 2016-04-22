@@ -1,11 +1,9 @@
 package com.sata.testapp.classes;
 
-import android.content.Context;
-
 import java.io.Serializable;
 
 public class UserData implements Serializable{
-    private static final long serialVersionUID = -6374678792440967465L;
+    private static final long serialVersionUID = 1L;
     private int idMensaje;
     private User user;
     private Airport airportFrom;
@@ -66,8 +64,6 @@ public class UserData implements Serializable{
     }
 
     public String toString(){
-        return "From: " + getAirportFrom().getPublicName() + "\n" +
-                "To: " + getAirportTo().getPublicName() + "\n"
-                ;
+        return "lo que se te ocurra";
     }
 }

@@ -12,7 +12,7 @@ import java.net.Socket;
  */
 
 public class Conection implements Runnable{
-    private final  String SERVERIP = "192.168.0.6" ; // your computer IP
+    private final  String SERVERIP = "201.251.242.207" ; // your computer IP
     private final int SERVERPORT = 3535;
     private ObjectOutputStream oos;
     private ObjectInputStream ois;
@@ -21,7 +21,6 @@ public class Conection implements Runnable{
 
 
     public Conection(){
-        this.run();
     }
 
     @Override
@@ -97,6 +96,7 @@ public class Conection implements Runnable{
     private void Comandos(UserData msj) {
         switch (msj.getIdMensaje()) {
             case 1:
+                System.out.println(msj.getAirportFrom().getCity());
                 break;
             case 2:
                 break;
