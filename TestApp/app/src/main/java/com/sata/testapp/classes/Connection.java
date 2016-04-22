@@ -97,15 +97,28 @@ public class Connection implements Runnable{
         }
     }
     private void Comandos(UserData msj) {
+        UserData aux;
         switch (msj.getIdMensaje()) {
             case 1:
+                aux = UserData.createUserData();
+                aux = msj;
                 System.out.println("Connected to server");
             case 2:
+                aux = UserData.createUserData();
+                aux = msj;
                 System.out.println("Local airport setted");
-
             case 3:
-                System.out.println("Connected to server");
-
+                aux = UserData.createUserData();
+                aux = msj;
+                System.out.println("Local airport changed");
+            case 4:
+                aux = UserData.createUserData();
+                aux = msj;
+                System.out.println("Destination airport setted");
+            case 5:
+                aux = UserData.createUserData();
+                aux = msj;
+                System.out.println("Result");
         }
     }
 
