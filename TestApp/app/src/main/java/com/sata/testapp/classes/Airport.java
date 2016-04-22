@@ -121,7 +121,7 @@ public class Airport implements Serializable {
             this.latitude = -25.737254;
             this.longitude = -54.473299;
             this.formalName = "Aeropuerto Internacional Cataratas del Iguazú";
-            this.city = "Iguazú";
+            this.city = "Puerto Iguazú";
             this.state = "Misiones";
             this.country = "Argentina";
         }
