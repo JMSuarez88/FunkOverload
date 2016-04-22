@@ -3,6 +3,7 @@ package com.sata.testapp.classes;
 import java.io.Serializable;
 
 public class UserData implements Serializable{
+    private static UserData userData = null;
     private static final long serialVersionUID = 1L;
     private int idMensaje;
     private User user;
@@ -10,11 +11,21 @@ public class UserData implements Serializable{
     private Airport airportTo;
     private Flight flight;
 
-    public UserData() {
+    private UserData() {
         this.user = User.createUser();
         this.airportFrom = new Airport();
         this.airportTo = new Airport();
         this.flight = new Flight();
+    }
+
+    public static UserData createUserData(){
+        if(userData == null){
+            userData = new UserData();
+            return userData;
+        } else {
+            System.out.println("UserData object alrady created");
+            return null;
+        }
     }
 
     // User

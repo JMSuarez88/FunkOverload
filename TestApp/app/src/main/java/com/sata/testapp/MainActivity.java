@@ -6,14 +6,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import com.sata.testapp.classes.Conection;
+import com.sata.testapp.classes.Connection;
 import com.sata.testapp.classes.GPS;
+import com.sata.testapp.classes.Send;
 import com.sata.testapp.classes.UserData;
 
 public class MainActivity extends AppCompatActivity {
     private UserData userData;
     private TextView userDataField;
-    private Conection cs;
+    private Connection cs;
     private Button buttonConnect;
     private GPS userGps;
 
@@ -33,25 +34,29 @@ public class MainActivity extends AppCompatActivity {
 
         // Instantiate objects
         this.userData = new UserData();
-        this.userDataField = (TextView) findViewById(R.id.userDataField);
-        this.buttonConnect = (Button) findViewById(R.id.buttonConnect);
+        //this.userDataField = (TextView) findViewById(R.id.userDataField);
+        //this.buttonConnect = (Button) findViewById(R.id.buttonConnect);
         this.userGps = new GPS(this);
         
         // Set up user location
-        this.userData.getUser().setLat(userGps.getLatitude);
-        this.userData.getUser().setLon(userGps.getLongitude);
-        
+        this.userData.getUser().setLat(userGps.getLatitude());
+        this.userData.getUser().setLon(userGps.getLongitude());
+        // Send user location
+        Send send = Send.createSend();
+        this.userData.setIdMensaje(2);
+        send.sendObject(userData);
+
         // Set up Flight
-        setupUserData("eze","tdf");
+        setupUserData("eze", "tdf");
         this.userData.getFlight().setupAirports(this.userData.getAirportFrom(), this.userData.getAirportTo());
 
         // Button
-        buttonConnect.setOnClickListener(new View.OnClickListener() {
+        /*buttonConnect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick() {
                 
             }
-        });
+        });*/
 
         // Set text field content
         this.userDataField.setText(
@@ -70,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
     }
     
     public void startServer() {
-		this.cs = new Conection();
+		this.cs = new Connection();
 		Thread t = new Thread(cs);
 		t.start();
 	}

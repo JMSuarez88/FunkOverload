@@ -11,7 +11,7 @@ import java.net.Socket;
  * Created by klincaja on 20/04/16.
  */
 
-public class Conection implements Runnable{
+public class Connection implements Runnable{
     private final  String SERVERIP = "201.251.242.207" ; // your computer IP
     private final int SERVERPORT = 3535;
     private ObjectOutputStream oos;
@@ -20,7 +20,7 @@ public class Conection implements Runnable{
     private boolean connectedCliente = false;
 
 
-    public Conection(){
+    public Connection(){
     }
 
     @Override
@@ -44,10 +44,13 @@ public class Conection implements Runnable{
                 oos = new ObjectOutputStream(s.getOutputStream());
                 ois = new ObjectInputStream(s.getInputStream());
 
+                Send send = Send.createSend();
+                send.setOos(oos);
+
                 Log.e("TCP Client", "C: Sent.");
-                UserData uData = new UserData();
+                UserData uData = UserData.createUserData();
                 uData.setIdMensaje(1);
-                oos.writeObject(uData);
+                send.sendObject(uData);
                 Log.e("TCP Client", "C: Done.");
 
                 // receive the message which the server sends back
@@ -96,10 +99,12 @@ public class Conection implements Runnable{
     private void Comandos(UserData msj) {
         switch (msj.getIdMensaje()) {
             case 1:
-                System.out.println(msj.getAirportFrom().getCity());
-                break;
+                System.out.println("Connected to server");
             case 2:
-                break;
+                System.out.println("Local airport setted");
+
+            case 3:
+                System.out.println("Connected to server");
 
         }
     }
