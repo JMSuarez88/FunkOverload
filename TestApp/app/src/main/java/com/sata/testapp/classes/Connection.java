@@ -12,7 +12,7 @@ import java.net.Socket;
  */
 
 public class Connection implements Runnable{
-    private final  String SERVERIP = "192.168.0.103" ; // your computer IP
+    private final  String SERVERIP = "192.168.2.60" ; // your computer IP
     private final int SERVERPORT = 3535;
     private ObjectOutputStream oos;
     private ObjectInputStream ois;
@@ -27,6 +27,7 @@ public class Connection implements Runnable{
             oos = new ObjectOutputStream(this.s.getOutputStream());
             ois = new ObjectInputStream(s.getInputStream());
         } catch (Exception e){
+            System.out.println("No instancia connecion");
             e.printStackTrace();
         }
 
