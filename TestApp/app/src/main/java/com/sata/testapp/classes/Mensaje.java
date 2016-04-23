@@ -6,8 +6,19 @@ import java.util.Vector;
 public class Mensaje implements Serializable{
 	private static final long serialVersionUID = -6374678792440967465L;
 	private int idMensaje;
+
+
+
+
+
+
+
+
 	private Vector<Airport> airports;
 	private String city;
+
+	public Mensaje() {
+	}
 
 	public Airport getAirport() {
 		return airport;

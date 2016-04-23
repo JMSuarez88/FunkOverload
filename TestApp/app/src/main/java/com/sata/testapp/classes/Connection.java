@@ -107,7 +107,7 @@ public class Connection implements Runnable{
         switch (msj.getIdMensaje()) {
             case 1:
                 aux = msj;
-                System.out.println("Connected to server\n" + aux.getAirport().getCity());
+                System.out.println("Connected to server");
                 break;
             case 2:
                 aux = msj;
@@ -130,8 +130,8 @@ public class Connection implements Runnable{
 
     public void sendObject(Mensaje uData){
         try {
-            oos.writeObject(uData);
-            oos.flush();
+            this.oos = new ObjectOutputStream(s.getOutputStream());
+            this.oos.writeObject(uData);
         } catch (Exception e){
             e.printStackTrace();
         }

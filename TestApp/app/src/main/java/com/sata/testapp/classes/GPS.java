@@ -39,6 +39,7 @@ public class GPS extends Service implements LocationListener {
     protected LocationManager locationManager;
     private Location location;
     private Geocoder geo;
+    private String city;
 
     // Constructor
     public GPS(Context context) {
@@ -177,7 +178,7 @@ public class GPS extends Service implements LocationListener {
         String city = "";
         try {
             //List<Address> address = geoCoder.getFromLocation(this.getLatitude(), this.getLongitude(), 1);
-            city = (geoCoder.getFromLocation(this.getLatitude(), this.getLongitude(), 1)).get(0).getLocality().toString();
+            city = (this.geo.getFromLocation(this.getLatitude(), this.getLongitude(), 1)).get(0).getLocality().toString();
             //city = address.get(0).getLocality().toString();
         } catch (Exception e){
             e.printStackTrace();

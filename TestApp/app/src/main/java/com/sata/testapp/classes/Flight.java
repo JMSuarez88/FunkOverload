@@ -1,15 +1,13 @@
 package com.sata.testapp.classes;
 
-import java.util.Date;
-
 /**
  * Created by kaotiks on 12/04/16.
  */
  
 public class Flight {
     // Attributes
-    private Date takeOffDate = null;
-    private Date landDate = null;
+    private String takeOffHour;
+    private String landHour;
     // Used for "Vuelos con escala"
     //private List<Airport> flightPath;
     private int id;
@@ -47,5 +45,21 @@ public class Flight {
     }
     public void setTo(Airport to) {
         this.to = to;
+    }
+
+    // Take off hour
+    public String getTakeOffHour() {
+        return takeOffHour;
+    }
+    public void setTakeOffHour(String takeOffHour) {
+        this.takeOffHour = takeOffHour;
+    }
+
+    // Land hour
+    public String getLandHour() {
+        return landHour;
+    }
+    public void setLandHour(String landHour) {
+        this.landHour = landHour;
     }
 }

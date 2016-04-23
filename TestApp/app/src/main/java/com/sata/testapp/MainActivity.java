@@ -7,23 +7,26 @@ import com.sata.testapp.classes.Connection;
 import com.sata.testapp.classes.GPS;
 import com.sata.testapp.classes.Mensaje;
 import com.sata.testapp.classes.UserData;
+import com.sata.testapp.classes.Weather;
 
 public class MainActivity extends AppCompatActivity {
     private UserData userData;
     private Connection cs;
     private GPS userGps;
+    private Weather w = new Weather("-54","-60");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        
-        // Don't remember what is this for
+
+        // Used to avoid the android.os.NetworkOnMainThreadException
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
-        
+
+        setContentView(R.layout.activity_main);
+
         // Start server
         this.startConnection();
 
@@ -39,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Send user location
         Mensaje msj = new Mensaje();
-        msj.setCity(userGps.getCity());
+        msj.setCity(this.userGps.getCity());
         msj.setIdMensaje(2);
         cs.sendObject(msj);
         // Set up Flight
