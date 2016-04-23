@@ -60,6 +60,9 @@ public class GPS extends Service implements LocationListener {
         }
         return this.longitude;
     }
+    public LocationManager getLocationManager(){
+        return this.locationManager;
+    }
     // Get the user Location (lat, lon)
     // toDo: improve this section in order to open GPS/NETWORK settings if disabled
     public Location getLocation() {
@@ -166,6 +169,19 @@ public class GPS extends Service implements LocationListener {
             }
             locationManager.removeUpdates(GPS.this);
         }
+    }
+
+    public String getCity(){
+        Geocoder geoCoder = new Geocoder(this);
+        StringBuilder builder = new StringBuilder();
+        String city = "";
+        try {
+            List<Address> address = geoCoder.getFromLocation(this.getLatitude(), this.getLongitude(), 1);
+            city = address.get(0).getLocality().toString();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return city;
     }
 
     

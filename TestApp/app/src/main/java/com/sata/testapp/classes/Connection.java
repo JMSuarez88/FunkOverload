@@ -12,7 +12,7 @@ import java.net.Socket;
  */
 
 public class Connection implements Runnable{
-    private final  String SERVERIP = "201.251.242.207" ; // your computer IP
+    private final  String SERVERIP = "192.168.0.103" ; // your computer IP
     private final int SERVERPORT = 3535;
     private ObjectOutputStream oos;
     private ObjectInputStream ois;
@@ -102,7 +102,7 @@ public class Connection implements Runnable{
             case 1:
                 aux = UserData.createUserData();
                 aux = msj;
-                System.out.println("Connected to server");
+                System.out.println("Connected to server\n" + aux.getAirportFrom().getCity());
             case 2:
                 aux = UserData.createUserData();
                 aux = msj;

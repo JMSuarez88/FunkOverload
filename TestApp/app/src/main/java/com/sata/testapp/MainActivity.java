@@ -1,5 +1,7 @@
 package com.sata.testapp;
 
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +12,8 @@ import com.sata.testapp.classes.Connection;
 import com.sata.testapp.classes.GPS;
 import com.sata.testapp.classes.Send;
 import com.sata.testapp.classes.UserData;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private UserData userData;
@@ -41,13 +45,14 @@ public class MainActivity extends AppCompatActivity {
         // Set up user location
         this.userData.getUser().setLat(userGps.getLatitude());
         this.userData.getUser().setLon(userGps.getLongitude());
+        this.userData.getUser().setCity(userGps.getCity());
+
         // Send user location
         Send send = Send.createSend();
         this.userData.setIdMensaje(2);
         send.sendObject(userData);
 
         // Set up Flight
-        setupUserData("eze", "tdf");
         this.userData.getFlight().setupAirports(this.userData.getAirportFrom(), this.userData.getAirportTo());
 
         // Button
@@ -67,11 +72,6 @@ public class MainActivity extends AppCompatActivity {
                 //this.userData.getAirportTo().toString() + "\n" +
                 //this.userData.getFlight().toString()
         );
-    }
-
-    public void setupUserData(String from, String to){
-        this.userData.getAirportFrom().setupAirport(from);
-        this.userData.getAirportTo().setupAirport(to);
     }
     
     public void startServer() {

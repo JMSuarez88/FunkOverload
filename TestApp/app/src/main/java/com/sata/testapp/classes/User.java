@@ -52,8 +52,13 @@ public class User implements Serializable {
     public void setLon(double lon){
 		this.lon = lon;
 	}
+
+    // City
     public String getCity(){
         return this.city;
+    }
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String toString(){

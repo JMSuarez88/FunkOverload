@@ -65,9 +65,7 @@ public class UserData implements Serializable{
     public void setAirportFrom(Airport airportFrom) {
         this.airportFrom = airportFrom;
     }
-    public void setupAirportFrom(String iata) {
-        this.airportFrom.setupAirport(iata);
-    }
+
 
     // Airport To
     public Airport getAirportTo() {
@@ -75,9 +73,6 @@ public class UserData implements Serializable{
     }
     public void setAirportTo(Airport airportTo) {
         this.airportTo = airportTo;
-    }
-    public void setupAirportTo(String iata) {
-        this.airportTo.setupAirport(iata);
     }
 
     // Flight
