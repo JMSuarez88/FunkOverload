@@ -176,8 +176,9 @@ public class GPS extends Service implements LocationListener {
         StringBuilder builder = new StringBuilder();
         String city = "";
         try {
-            List<Address> address = geoCoder.getFromLocation(this.getLatitude(), this.getLongitude(), 1);
-            city = address.get(0).getLocality().toString();
+            //List<Address> address = geoCoder.getFromLocation(this.getLatitude(), this.getLongitude(), 1);
+            city = (geoCoder.getFromLocation(this.getLatitude(), this.getLongitude(), 1)).get(0).getLocality().toString();
+            //city = address.get(0).getLocality().toString();
         } catch (Exception e){
             e.printStackTrace();
         }

@@ -34,12 +34,12 @@ public class MainActivity extends AppCompatActivity {
         // Set up user location
         this.userData.getUser().setLat(userGps.getLatitude());
         this.userData.getUser().setLon(userGps.getLongitude());
-        this.userData.getUser().setCity(userGps.getCity());
+        //this.userData.getUser().setCity(userGps.getCity());
 
         // Send user location
         Send send = Send.createSend();
         this.userData.setIdMensaje(2);
-        send.sendObject(userData);
+        send.sendObject(this.userData);
 
         // Set up Flight
         this.userData.getFlight().setupAirports(this.userData.getAirportFrom(), this.userData.getAirportTo());
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     
     public void startConnection() {
 		this.cs = new Connection();
-		Thread t = new Thread(cs);
+		Thread t = new Thread(this.cs);
 		t.start();
 	}
 }

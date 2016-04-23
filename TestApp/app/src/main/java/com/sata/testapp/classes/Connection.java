@@ -1,7 +1,6 @@
 package com.sata.testapp.classes;
 
 
-import android.content.Context;
 import android.util.Log;
 import java.io.*;
 import java.net.InetAddress;
@@ -12,7 +11,7 @@ import java.net.Socket;
  */
 
 public class Connection implements Runnable{
-    private final  String SERVERIP = "192.168.2.60" ; // your computer IP
+    private final  String SERVERIP = "192.168.2.100" ; // your computer IP
     private final int SERVERPORT = 3535;
     private ObjectOutputStream oos;
     private ObjectInputStream ois;
@@ -22,12 +21,13 @@ public class Connection implements Runnable{
 
     public Connection(){
         try{
-            InetAddress serverAddr = InetAddress.getByName(SERVERIP);
+            this.serverAddr = InetAddress.getByName(SERVERIP);
             s = new Socket(serverAddr, SERVERPORT);
-            oos = new ObjectOutputStream(this.s.getOutputStream());
-            ois = new ObjectInputStream(s.getInputStream());
+            this.oos = new ObjectOutputStream(this.s.getOutputStream());
+            this.oos.flush();
+            this.ois = new ObjectInputStream(s.getInputStream());
         } catch (Exception e){
-            System.out.println("No instancia connecion");
+            System.out.println("No instance connection");
             e.printStackTrace();
         }
 
@@ -55,7 +55,7 @@ public class Connection implements Runnable{
                 //ois = new ObjectInputStream(s.getInputStream());
 
                 Send send = Send.createSend();
-                send.setOos(oos);
+                send.setOos(this.oos);
 
                 Log.e("TCP Client", "C: Sent.");
                 UserData uData = new UserData();
@@ -69,7 +69,7 @@ public class Connection implements Runnable{
                 while (connectedCliente) {
                     try{
                         UserData aux = (UserData)ois.readObject();
-                        Comandos(aux);
+                        Commandos(aux);
                     }catch (Exception ex){
                         ex.printStackTrace();
                     }
@@ -106,24 +106,29 @@ public class Connection implements Runnable{
             ex.printStackTrace();
         }
     }
-    private void Comandos(UserData msj) {
-        UserData aux = new UserData();
+    private void Commandos(UserData msj) {
+        UserData aux;
         switch (msj.getIdMensaje()) {
             case 1:
                 aux = msj;
                 System.out.println("Connected to server\n" + aux.getAirportFrom().getCity());
+                break;
             case 2:
                 aux = msj;
                 System.out.println("Local airport setted");
+                break;
             case 3:
                 aux = msj;
                 System.out.println("Local airport changed");
+                break;
             case 4:
                 aux = msj;
                 System.out.println("Destination airport setted");
+                break;
             case 5:
                 aux = msj;
                 System.out.println("Result");
+                break;
         }
     }
 

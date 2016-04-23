@@ -23,7 +23,7 @@ public class UserData implements Serializable{
 
     // Private constructor for singleton
     public UserData() {
-        this.user = User.createUser();
+        this.user = new User();
         this.airportFrom = new Airport();
         this.airportTo = new Airport();
         this.flight = new Flight();

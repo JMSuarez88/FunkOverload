@@ -9,7 +9,6 @@ import java.io.Serializable;
 public class User implements Serializable {
     // Attributes
     private static final long serialVersionUID = 1L;
-    private static User instance = null;
     private double lat;
     private double lon;
     private String city;
@@ -17,18 +16,7 @@ public class User implements Serializable {
     private String country;
 
     // Private constructor for Singleton
-    private User() {
-    }
-
-    // Method for User creation (allow just one instance of User across the app)
-    public static User createUser(){
-        if(instance == null) {
-            instance = new User();
-            return instance;
-        } else {
-            System.out.println("User already created");
-            return null;
-        }
+    public User() {
     }
     
     // Latitude

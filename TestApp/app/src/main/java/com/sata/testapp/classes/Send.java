@@ -23,7 +23,7 @@ public class Send {
             return send;
         } else {
             System.out.println("User already created");
-            return null;
+            return send;
         }
     }
 
@@ -35,6 +35,7 @@ public class Send {
     public void sendObject(UserData uData){
         try {
             oos.writeObject(uData);
+            oos.flush();
         } catch (Exception e){
             e.printStackTrace();
         }
