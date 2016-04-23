@@ -34,11 +34,12 @@ public class MainActivity extends AppCompatActivity {
         // Set up user location
         this.userData.getUser().setLat(userGps.getLatitude());
         this.userData.getUser().setLon(userGps.getLongitude());
-        this.userData.getUser().setCity("Rosario");
+        //this.userData.getUser().setCity("Rosario");
         //this.userData.getUser().setCity(userGps.getCity());
 
         // Send user location
         Mensaje msj = new Mensaje();
+        msj.setCity(userGps.getCity());
         msj.setIdMensaje(2);
         cs.sendObject(msj);
         // Set up Flight

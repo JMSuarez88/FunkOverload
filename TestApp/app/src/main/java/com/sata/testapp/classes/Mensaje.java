@@ -7,6 +7,7 @@ public class Mensaje implements Serializable{
 	private static final long serialVersionUID = -6374678792440967465L;
 	private int idMensaje;
 	private Vector<Airport> airports;
+	private String city;
 
 	public Airport getAirport() {
 		return airport;
@@ -14,6 +15,14 @@ public class Mensaje implements Serializable{
 
 	public void setAirport(Airport airport) {
 		this.airport = airport;
+	}
+
+	// City
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
 	}
 
 	private Airport airport;
