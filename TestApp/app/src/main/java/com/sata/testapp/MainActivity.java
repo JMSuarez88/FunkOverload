@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         this.startServer();
 
         // Instantiate objects
-        this.userData = UserData.createUserData();
+        this.userData = new UserData();
         //this.userDataField = (TextView) findViewById(R.id.userDataField);
         //this.buttonConnect = (Button) findViewById(R.id.buttonConnect);
         this.userGps = new GPS(this);

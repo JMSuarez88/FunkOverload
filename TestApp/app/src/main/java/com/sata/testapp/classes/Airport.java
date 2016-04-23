@@ -10,7 +10,7 @@ public class Airport implements Serializable {
     // Attributes
     private static final long serialVersionUID = 1L;
     private String formalName;
-    private int iata;
+    private String iata;
     private double latitude;
     private double longitude;
     private String city;
@@ -37,10 +37,10 @@ public class Airport implements Serializable {
     }
 
     // IATA code
-    public int getIata() {
+    public String getIata() {
         return iata;
     }
-    public void setIata(int iata) {
+    public void setIata(String iata) {
         this.iata = iata;
     }
 

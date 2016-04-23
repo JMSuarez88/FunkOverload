@@ -18,9 +18,18 @@ public class Connection implements Runnable{
     private ObjectInputStream ois;
     private Socket s;
     private boolean connectedCliente = false;
-
+    private InetAddress serverAddr = null;
 
     public Connection(){
+        try{
+            InetAddress serverAddr = InetAddress.getByName(SERVERIP);
+            s = new Socket(serverAddr, SERVERPORT);
+            oos = new ObjectOutputStream(this.s.getOutputStream());
+            ois = new ObjectInputStream(s.getInputStream());
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
     @Override
@@ -30,25 +39,25 @@ public class Connection implements Runnable{
         try {
 
             // here you must put your computer's IP address.
-            InetAddress serverAddr = InetAddress.getByName(SERVERIP);
+
             Log.e("serverAddr", serverAddr.toString());
             Log.e("TCP Client", "C: Connecting...");
 
             // create a socket to make the connection with the server
-            s = new Socket(serverAddr, SERVERPORT);
+
             Log.e("TCP Server IP", SERVERIP);
             try {
 
                 // send the message to the server
 
-                oos = new ObjectOutputStream(s.getOutputStream());
-                ois = new ObjectInputStream(s.getInputStream());
+                //oos = new ObjectOutputStream(s.getOutputStream());
+                //ois = new ObjectInputStream(s.getInputStream());
 
                 Send send = Send.createSend();
                 send.setOos(oos);
 
                 Log.e("TCP Client", "C: Sent.");
-                UserData uData = UserData.createUserData();
+                UserData uData = new UserData();
                 uData.setIdMensaje(1);
                 send.sendObject(uData);
                 Log.e("TCP Client", "C: Done.");
@@ -97,26 +106,21 @@ public class Connection implements Runnable{
         }
     }
     private void Comandos(UserData msj) {
-        UserData aux;
+        UserData aux = new UserData();
         switch (msj.getIdMensaje()) {
             case 1:
-                aux = UserData.createUserData();
                 aux = msj;
                 System.out.println("Connected to server\n" + aux.getAirportFrom().getCity());
             case 2:
-                aux = UserData.createUserData();
                 aux = msj;
                 System.out.println("Local airport setted");
             case 3:
-                aux = UserData.createUserData();
                 aux = msj;
                 System.out.println("Local airport changed");
             case 4:
-                aux = UserData.createUserData();
                 aux = msj;
                 System.out.println("Destination airport setted");
             case 5:
-                aux = UserData.createUserData();
                 aux = msj;
                 System.out.println("Result");
         }
