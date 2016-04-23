@@ -1,13 +1,10 @@
 package com.sata.testapp.classes;
 
-import java.io.Serializable;
-import java.util.List;
+import java.util.Vector;
 
-public class UserData implements Serializable{
-    // Serial version to connect to server
-    private static final long serialVersionUID = 1L;
+public class UserData {
     // Available airports (set values from server)
-    private List<Airport> airports = null;
+    private Vector<Airport> airports;
     // Message id from server. Indicates know how to proceed according to the id number
     private int idMensaje;
     // Final result
@@ -27,6 +24,8 @@ public class UserData implements Serializable{
         this.airportFrom = new Airport();
         this.airportTo = new Airport();
         this.flight = new Flight();
+        this.airports = new Vector<Airport>();
+
     }
 
     // User
@@ -71,10 +70,10 @@ public class UserData implements Serializable{
     }
 
     // Available airports
-    public List<Airport> getAirports() {
+    public Vector<Airport> getAirports() {
         return airports;
     }
-    public void setAirports(List<Airport> airports) {
+    public void setAirports(Vector<Airport> airports) {
         this.airports = airports;
     }
 

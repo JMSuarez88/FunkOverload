@@ -1,6 +1,7 @@
 package com.sata.testapp.classes;
 
 
+import android.content.Context;
 import android.util.Log;
 import java.io.*;
 import java.net.InetAddress;
@@ -18,19 +19,16 @@ public class Connection implements Runnable{
     private Socket s;
     private boolean connectedCliente = false;
     private InetAddress serverAddr = null;
-
-    public Connection(){
-        try{
-            this.serverAddr = InetAddress.getByName(SERVERIP);
-            s = new Socket(serverAddr, SERVERPORT);
-            this.oos = new ObjectOutputStream(this.s.getOutputStream());
-            this.oos.flush();
-            this.ois = new ObjectInputStream(s.getInputStream());
-        } catch (Exception e){
-            System.out.println("No instance connection");
-            e.printStackTrace();
+    private static Connection instance = null;
+    private Connection(){
+        Thread t = new Thread(this);
+        t.start();
+    }
+    public static Connection getInstance(){
+        if(instance == null){
+            instance = new Connection();
         }
-
+        return instance;
     }
 
     @Override
@@ -40,7 +38,7 @@ public class Connection implements Runnable{
         try {
 
             // here you must put your computer's IP address.
-
+            this.serverAddr = InetAddress.getByName(SERVERIP);
             Log.e("serverAddr", serverAddr.toString());
             Log.e("TCP Client", "C: Connecting...");
 
@@ -49,18 +47,16 @@ public class Connection implements Runnable{
             Log.e("TCP Server IP", SERVERIP);
             try {
 
+                s = new Socket(serverAddr, SERVERPORT);
                 // send the message to the server
+                oos = new ObjectOutputStream(s.getOutputStream());
+                ois = new ObjectInputStream(s.getInputStream());
 
-                //oos = new ObjectOutputStream(s.getOutputStream());
-                //ois = new ObjectInputStream(s.getInputStream());
-
-                Send send = Send.createSend();
-                send.setOos(this.oos);
 
                 Log.e("TCP Client", "C: Sent.");
-                UserData uData = new UserData();
-                uData.setIdMensaje(1);
-                send.sendObject(uData);
+                Mensaje msj = new Mensaje();
+                msj.setIdMensaje(1);
+                sendObject(msj);
                 Log.e("TCP Client", "C: Done.");
 
                 // receive the message which the server sends back
@@ -68,7 +64,7 @@ public class Connection implements Runnable{
                 // server
                 while (connectedCliente) {
                     try{
-                        UserData aux = (UserData)ois.readObject();
+                        Mensaje aux = (Mensaje) ois.readObject();
                         Commandos(aux);
                     }catch (Exception ex){
                         ex.printStackTrace();
@@ -106,12 +102,12 @@ public class Connection implements Runnable{
             ex.printStackTrace();
         }
     }
-    private void Commandos(UserData msj) {
-        UserData aux;
+    private void Commandos(Mensaje msj) {
+        Mensaje aux;
         switch (msj.getIdMensaje()) {
             case 1:
                 aux = msj;
-                System.out.println("Connected to server\n" + aux.getAirportFrom().getCity());
+                System.out.println("Connected to server\n" + aux.getAirport().getCity());
                 break;
             case 2:
                 aux = msj;
@@ -130,6 +126,16 @@ public class Connection implements Runnable{
                 System.out.println("Result");
                 break;
         }
+    }
+
+    public void sendObject(Mensaje uData){
+        try {
+            oos.writeObject(uData);
+            oos.flush();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
 }

@@ -5,7 +5,7 @@ import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import com.sata.testapp.classes.Connection;
 import com.sata.testapp.classes.GPS;
-import com.sata.testapp.classes.Send;
+import com.sata.testapp.classes.Mensaje;
 import com.sata.testapp.classes.UserData;
 
 public class MainActivity extends AppCompatActivity {
@@ -34,21 +34,19 @@ public class MainActivity extends AppCompatActivity {
         // Set up user location
         this.userData.getUser().setLat(userGps.getLatitude());
         this.userData.getUser().setLon(userGps.getLongitude());
+        this.userData.getUser().setCity("Rosario");
         //this.userData.getUser().setCity(userGps.getCity());
 
         // Send user location
-        Send send = Send.createSend();
-        this.userData.setIdMensaje(2);
-        send.sendObject(this.userData);
-
+        Mensaje msj = new Mensaje();
+        msj.setIdMensaje(2);
+        cs.sendObject(msj);
         // Set up Flight
         this.userData.getFlight().setupAirports(this.userData.getAirportFrom(), this.userData.getAirportTo());
     }
     
     public void startConnection() {
-		this.cs = new Connection();
-		Thread t = new Thread(this.cs);
-		t.start();
+		this.cs = Connection.getInstance();
 	}
 }
 

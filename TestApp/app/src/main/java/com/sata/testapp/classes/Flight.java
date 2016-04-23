@@ -1,15 +1,13 @@
 package com.sata.testapp.classes;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by kaotiks on 12/04/16.
  */
  
-public class Flight implements Serializable {
+public class Flight {
     // Attributes
-    private static final long serialVersionUID = 1L;
     private Date takeOffDate = null;
     private Date landDate = null;
     // Used for "Vuelos con escala"

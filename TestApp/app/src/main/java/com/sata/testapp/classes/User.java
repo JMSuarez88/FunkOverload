@@ -1,14 +1,11 @@
 package com.sata.testapp.classes;
 
-import java.io.Serializable;
-
 /**
  * Created by kaotiks on 11/04/16.
  */
  
-public class User implements Serializable {
+public class User {
     // Attributes
-    private static final long serialVersionUID = 1L;
     private double lat;
     private double lon;
     private String city;
