@@ -14,15 +14,13 @@ import java.net.Socket;
 public class Connection implements Runnable{
     private final  String SERVERIP = "192.168.2.100" ; // your computer IP
     private final int SERVERPORT = 3535;
+    private Mensaje mensaje;
     private ObjectOutputStream oos;
     private ObjectInputStream ois;
     private Socket s;
-    private boolean connectedCliente = false;
     private InetAddress serverAddr = null;
     private static Connection instance = null;
     private Connection(){
-        Thread t = new Thread(this);
-        t.start();
     }
     public static Connection getInstance(){
         if(instance == null){
@@ -30,11 +28,17 @@ public class Connection implements Runnable{
         }
         return instance;
     }
+    public void setMensaje(Mensaje msj){
+        this.mensaje = msj;
+        Thread t = new Thread(this);
+        t.start();
+    }
+    public Mensaje getMensaje(){
+        return mensaje;
+    }
 
     @Override
     public void run() {
-        connectedCliente = true;
-
         try {
 
             // here you must put your computer's IP address.
@@ -54,25 +58,17 @@ public class Connection implements Runnable{
 
 
                 Log.e("TCP Client", "C: Sent.");
-                Mensaje msj = new Mensaje();
-                msj.setIdMensaje(1);
-                sendObject(msj);
+                oos.writeObject(mensaje);
                 Log.e("TCP Client", "C: Done.");
 
+                Mensaje aux = (Mensaje) ois.readObject();
+                Commandos(aux);
+                Log.e("TCP Client", "C:Recived");
                 // receive the message which the server sends back
                 // in this while the client listens for the messages sent by the
                 // server
-                while (connectedCliente) {
-                    try{
-                        Mensaje aux = (Mensaje) ois.readObject();
-                        Commandos(aux);
-                    }catch (Exception ex){
-                        ex.printStackTrace();
-                    }
-                }
-
-
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
 
                 Log.e("TCP", "S: Error", e);
 
@@ -90,6 +86,8 @@ public class Connection implements Runnable{
 
         }
 
+        close();
+
     }
     public void close(){
         try{
@@ -103,39 +101,22 @@ public class Connection implements Runnable{
         }
     }
     private void Commandos(Mensaje msj) {
-        Mensaje aux;
         switch (msj.getIdMensaje()) {
             case 1:
-                aux = msj;
                 System.out.println("Connected to server");
                 break;
             case 2:
-                aux = msj;
                 System.out.println("Local airport setted");
                 break;
             case 3:
-                aux = msj;
                 System.out.println("Local airport changed");
                 break;
             case 4:
-                aux = msj;
                 System.out.println("Destination airport setted");
                 break;
             case 5:
-                aux = msj;
                 System.out.println("Result");
                 break;
         }
     }
-
-    public void sendObject(Mensaje uData){
-        try {
-            this.oos = new ObjectOutputStream(s.getOutputStream());
-            this.oos.writeObject(uData);
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-
-    }
-
 }
