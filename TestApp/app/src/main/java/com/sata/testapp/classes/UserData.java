@@ -1,10 +1,15 @@
 package com.sata.testapp.classes;
 
-import java.util.Vector;
+import java.io.Serializable;
+import java.util.List;
 
-public class UserData {
+public class UserData implements Serializable{
+    // Serial version to connect to server
+    private static final long serialVersionUID = 1L;
+    // Singleton attribute
+    private static UserData userData = null;
     // Available airports (set values from server)
-    private Vector<Airport> airports;
+    private List<Airport> airports = null;
     // Message id from server. Indicates know how to proceed according to the id number
     private int idMensaje;
     // Final result
@@ -19,13 +24,22 @@ public class UserData {
     private Flight flight;
 
     // Private constructor for singleton
-    public UserData() {
-        this.user = new User();
+    private UserData() {
+        this.user = User.createUser();
         this.airportFrom = new Airport();
         this.airportTo = new Airport();
         this.flight = new Flight();
-        this.airports = new Vector<Airport>();
+    }
 
+    // Static method to instantiate the UserData class
+    public static UserData createUserData(){
+        if(userData == null){
+            userData = new UserData();
+            return userData;
+        } else {
+            System.out.println("UserData object alrady created");
+            return null;
+        }
     }
 
     // User
@@ -51,10 +65,6 @@ public class UserData {
     public void setAirportFrom(Airport airportFrom) {
         this.airportFrom = airportFrom;
     }
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 
     // Airport To
     public Airport getAirportTo() {
@@ -73,10 +83,10 @@ public class UserData {
     }
 
     // Available airports
-    public Vector<Airport> getAirports() {
+    public List<Airport> getAirports() {
         return airports;
     }
-    public void setAirports(Vector<Airport> airports) {
+    public void setAirports(List<Airport> airports) {
         this.airports = airports;
     }
 
