@@ -7,6 +7,7 @@ public class Mensaje implements Serializable{
 	private static final long serialVersionUID = -6374678792440967465L;
 	private int idMensaje;
 	private String city;
+	private List<String> flight;
 	private Airport airport;
 	private List<Airport> airportList;
 	// City
@@ -54,5 +55,11 @@ public class Mensaje implements Serializable{
 	}
 	public void setAirportList(List<Airport> airportList) {
 		this.airportList = airportList;
+	}
+	public List<String> getFlight() {
+		return flight;
+	}
+	public void setFlight(List<String> flight) {
+		this.flight = flight;
 	}
 }

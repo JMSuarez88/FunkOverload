@@ -18,7 +18,7 @@ import com.sata.testapp.classes.UserData;
 
 
 public class MainActivity extends AppCompatActivity implements OnClickListener{
-    private TextView tv_texto;
+    private TextView tv_texto,tv_labelStatus;
     private ImageButton bt_Button;
     private GPS gps ;
     private Mensaje msj;
@@ -31,7 +31,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
         setContentView(R.layout.activity_main);
         this.gps = new GPS(this);
         this.userData = UserData.createUserData();
-        tv_texto =(TextView)findViewById(R.id.tv_userDataField);
+        tv_texto =(TextView)findViewById(R.id.tv_labelWelcome);
+        tv_labelStatus = (TextView)findViewById(R.id.tv_labelStatus);
         bt_Button=(ImageButton) findViewById(R.id.bt_Connect);
         bt_Button.setOnClickListener(this);//preparar
 
@@ -43,6 +44,10 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
         this.userData.getUser().setLat(gps.getLatitude());
         this.userData.getUser().setLon(gps.getLongitude());
         this.userData.getUser().setCity(gps.getCity());
+
+        this.tv_labelStatus.setVisibility(View.VISIBLE);
+        this.tv_labelStatus.setText("COMENZAR");
+
     }
 
 
@@ -57,9 +62,12 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
                 msj.setCity(this.userData.getUser().getCity());
                 this.conexion.setMensaje(msj);
                 try {
-                    Thread.sleep(1000);
-                    Log.e("Boton evento","DORMIR 1000ms");
+                    this.tv_labelStatus.setText("CARGANDO");
+                    while(!UserData.createUserData().isConnect()){
+                        Thread.sleep(50);
+                    }
                 } catch (InterruptedException e) {
+                    tv_texto.setText("Error al conectar intente nuevamente");//en caso de falla solo escribir disconected
                     e.printStackTrace();
                 }
                 //hacer al connectar
@@ -67,10 +75,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
                 if(userData.isConnect()){
                     Intent intent01 = new Intent(MainActivity.this, Second_Activity.class);
                     startActivity(intent01);
-                }else{
-                    tv_texto.setText("@string/disconnect");//en caso de falla solo escribir disconected
                 }
-
                 break;
 
 

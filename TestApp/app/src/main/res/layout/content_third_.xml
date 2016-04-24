@@ -8,12 +8,27 @@
     tools:context="com.sata.testapp.Third_Activity"
     tools:showIn="@layout/activity_third_"
     android:orientation="vertical"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:background="@color/background_material_dark">
 
-    <Spinner
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Seleccione su aeropuerto"
+        android:id="@+id/tv_SelectAirport"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:textColor="#ffffff"
+        android:textSize="25dp"
+        android:textStyle="bold" />
+
+    <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/spinner"
+        android:id="@+id/lv_Airports"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.29" />
+        android:listSelector="@color/accent_material_light"
+        android:background="@color/button_material_light"
+        android:smoothScrollbar="true"
+        android:textAlignment="center" />
 </LinearLayout>

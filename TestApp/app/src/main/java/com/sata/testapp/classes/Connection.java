@@ -103,11 +103,14 @@ public class Connection implements Runnable{
     private void Commandos(Mensaje msj) {
         switch (msj.getIdMensaje()) {
             case 1:
-                System.out.println("Connected to server");
                 UserData.createUserData().setConnect(true);
+                UserData.createUserData().getUser().setCity(msj.getCity());
+                UserData.createUserData().setAirportFrom(msj.getAirport());
+                UserData.createUserData().setAirports(msj.getAirportList());
                 break;
             case 2:
-                System.out.println("Local airport setted");
+                UserData.createUserData().setFlightTime(msj.getFlight());
+                UserData.createUserData().setConnect(true);
                 break;
             case 3:
                 System.out.println("Local airport changed");

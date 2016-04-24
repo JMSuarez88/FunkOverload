@@ -7,7 +7,6 @@
     android:background="@color/background_material_dark"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.sata.testapp.MainActivity"
-    tools:showIn="@layout/activity_main"
     android:orientation="vertical"
     android:weightSum="1"
     android:focusable="false">
@@ -20,21 +19,15 @@
         android:src="@drawable/muso4" />
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="90dp"
-        android:textSize="33dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginBottom="20dp"
-        android:id="@+id/tv_userDataField"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:text="@string/first_screen_hi"
-        android:textColor="@color/abc_background_cache_hint_selector_material_light"
-        android:textAlignment="center"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:text="Bienvenidos a Muso"
+        android:id="@+id/tv_labelWelcome"
+        android:layout_gravity="center_horizontal"
         android:textStyle="bold"
-        android:layout_weight="0.34"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp" />
+        android:textColor="#00c0c0"
+        android:textSize="@dimen/abc_action_button_min_width_overflow_material"
+        android:layout_weight="0.57" />
 
     <ImageButton
         android:layout_width="56dp"
@@ -49,6 +42,17 @@
         android:src="@android:drawable/btn_star_big_off"
         android:background="#00ffffff"
         android:layout_weight="0.14" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_labelStatus"
+        android:layout_gravity="center_horizontal"
+        android:textSize="30dp"
+        android:textColor="#00c0c0"
+        android:visibility="invisible"
+        android:textAlignment="center"
+        android:gravity="fill_horizontal" />
 
     <!--<TextView
         android:layout_width="fill_parent"

@@ -11,6 +11,16 @@ public class UserData{
     private int idMensaje;
     // Final result
     private int result;
+
+    public List<String> getFlightTime() {
+        return flightTime;
+    }
+
+    public void setFlightTime(List<String> flightTime) {
+        this.flightTime = flightTime;
+    }
+
+    private List<String> flightTime;
     // User instance
     private User user;
     // Airport From

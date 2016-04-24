@@ -6,6 +6,24 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.sata.testapp.Fourth_Activity"
-    tools:showIn="@layout/activity_fourth_">
+    tools:showIn="@layout/activity_fourth_"
+    android:background="@color/background_material_dark"
+    android:orientation="vertical">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_labelSelectTo"
+        android:text="Seleccione su destino"
+        android:textColor="#ffffff"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:layout_marginLeft="30dp" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/lv_airportTo"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/button_material_light" />
 </LinearLayout>
