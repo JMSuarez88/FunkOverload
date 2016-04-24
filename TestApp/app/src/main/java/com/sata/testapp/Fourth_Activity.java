@@ -11,9 +11,13 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.sata.testapp.classes.Airport;
 import com.sata.testapp.classes.Connection;
 import com.sata.testapp.classes.Mensaje;
 import com.sata.testapp.classes.UserData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Fourth_Activity extends AppCompatActivity {
 
@@ -38,10 +42,12 @@ public class Fourth_Activity extends AppCompatActivity {
                     if(UserData.createUserData().getAirports().get(i).getFormalName() == airports[position]) {
                         //Toast.makeText(getApplicationContext(), "Se encontro :" + position, Toast.LENGTH_SHORT).show();
                         UserData.createUserData().setAirportTo(UserData.createUserData().getAirports().get(i));
+                        List<Airport> AirportList = new ArrayList<Airport>();
                         Mensaje msj = new Mensaje();
                         msj.setIdMensaje(2);
-                        msj.getAirportList().add(UserData.createUserData().getAirportFrom());
-                        msj.getAirportList().add(UserData.createUserData().getAirportTo());
+                        AirportList.add(UserData.createUserData().getAirportFrom());
+                        AirportList.add(UserData.createUserData().getAirportTo());
+                        msj.setAirportList(AirportList);
                         Connection.getInstance().setMensaje(msj);
                         try{
                             while (!UserData.createUserData().isConnect()) {
