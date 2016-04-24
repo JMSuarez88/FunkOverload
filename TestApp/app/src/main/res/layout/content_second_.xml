@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_material_dark"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.sata.testapp.Second_Activity"
+    tools:showIn="@layout/activity_second_"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="267dp"
+        android:id="@+id/iv_logo_0"
+        android:src="@drawable/muso4" />
+
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="76dp"
+        android:textSize="30dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="20dp"
+        android:id="@+id/tv_userDataField_0"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/second_screen_predef"
+        android:textColor="@color/abc_background_cache_hint_selector_material_light"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:layout_weight="0.68"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.16"
+        android:weightSum="1">
+
+        <Button
+            android:layout_width="190dp"
+            android:layout_height="match_parent"
+            android:text="@string/bt_change2"
+            android:id="@+id/bt_change"
+            android:singleLine="true"
+            android:layout_weight="0"
+            android:textColor="#00FFFF"
+            android:backgroundTint="@color/abc_background_cache_hint_selector_material_dark"
+            android:textSize="16dp"
+            android:clickable="true" />
+
+        <Button
+            android:layout_width="190dp"
+            android:layout_height="match_parent"
+            android:text="@string/bt_sig"
+            android:id="@+id/bt_next"
+            android:singleLine="true"
+            android:layout_weight="0"
+            android:backgroundTint="@color/background_material_dark"
+            android:textColor="#00FFFF"
+            android:textSize="16dp" />
+    </LinearLayout>
+
+
+</LinearLayout>

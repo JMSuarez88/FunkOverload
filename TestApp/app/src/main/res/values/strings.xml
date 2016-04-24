@@ -1,5 +1,5 @@
 <resources>
-	<string name="test"></string>
+    <string name="test"></string>
     <string name="app_name">Muŝo</string>
     <string name="app_description">Flight delay prediction app</string>
     <string name="action_settings">Settings</string>
@@ -12,4 +12,16 @@
     <string name="destination_airport">Destination</string>
     <string name="change_location">Change location</string>
     <string name="button_connect">Connect</string>
+    <string name="frist_screen_hi">Welcome to my kitchen</string>
+    <string name="title_activity_second2">Second2Activity</string>
+    <string name="disconnect">Desconectado</string>
+    <string name="bt_sig">Siguiente</string>
+
+    <string name="bt_change2">Cambiar ubicación</string>
+
+    <string name="second_screen_predef">Seleccione su aeropuerto de origen.</string>
+    <string name="title_activity_second_">Second_Activity</string>
+    <string name="title_activity_third_">Third_Activity</string>
+    <string name="title_activity_fourth_">Fourth_Activity</string>
+
 </resources>
