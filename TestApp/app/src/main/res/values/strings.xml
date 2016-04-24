@@ -12,7 +12,7 @@
     <string name="destination_airport">Destination</string>
     <string name="change_location">Change location</string>
     <string name="button_connect">Connect</string>
-    <string name="frist_screen_hi">Welcome to my kitchen</string>
+    <string name="first_screen_hi">Welcome to my kitchen</string>
     <string name="title_activity_second2">Second2Activity</string>
     <string name="disconnect">Desconectado</string>
     <string name="bt_sig">Siguiente</string>

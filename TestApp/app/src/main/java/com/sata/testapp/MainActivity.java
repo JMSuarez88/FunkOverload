@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
                 this.conexion.setMensaje(msj);
                 try {
                     Thread.sleep(1000);
-                    Log.e("Boton evento","DORMIR 100Mls");
+                    Log.e("Boton evento","DORMIR 1000ms");
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
