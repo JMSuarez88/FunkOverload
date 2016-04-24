@@ -12,7 +12,7 @@ import java.net.Socket;
  */
 
 public class Connection implements Runnable{
-    private final  String SERVERIP = "192.168.2.100" ; // your computer IP
+    private final  String SERVERIP = "192.168.0.103" ; // your computer IP
     private final int SERVERPORT = 3535;
     private Mensaje mensaje;
     private ObjectOutputStream oos;

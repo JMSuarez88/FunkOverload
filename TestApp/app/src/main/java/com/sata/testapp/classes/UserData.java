@@ -1,11 +1,8 @@
 package com.sata.testapp.classes;
 
-import java.io.Serializable;
 import java.util.List;
 
-public class UserData implements Serializable{
-    // Serial version to connect to server
-    private static final long serialVersionUID = 1L;
+public class UserData{
     // Singleton attribute
     private static UserData userData = null;
     // Available airports (set values from server)
@@ -23,6 +20,16 @@ public class UserData implements Serializable{
     // Flight instance
     private Flight flight;
 
+    private boolean Connect = false;
+
+    public boolean isConnect() {
+        return Connect;
+    }
+
+    public void setConnect(boolean connect) {
+        Connect = connect;
+    }
+
     // Private constructor for singleton
     private UserData() {
         this.user = new User();
@@ -38,7 +45,7 @@ public class UserData implements Serializable{
             return userData;
         } else {
             System.out.println("UserData object alrady created");
-            return null;
+            return userData;
         }
     }
 
