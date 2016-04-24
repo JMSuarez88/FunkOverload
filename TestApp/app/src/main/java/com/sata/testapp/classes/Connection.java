@@ -104,6 +104,7 @@ public class Connection implements Runnable{
         switch (msj.getIdMensaje()) {
             case 1:
                 System.out.println("Connected to server");
+                UserData.createUserData().setConnect(true);
                 break;
             case 2:
                 System.out.println("Local airport setted");

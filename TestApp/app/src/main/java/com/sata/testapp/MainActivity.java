@@ -13,6 +13,7 @@ import com.sata.testapp.classes.Connection;
 import com.sata.testapp.classes.GPS;
 import com.sata.testapp.classes.Mensaje;
 import com.sata.testapp.classes.User;
+import android.util.Log;
 import com.sata.testapp.classes.UserData;
 
 
@@ -55,22 +56,20 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
                 msj.setGpsA_x(this.userData.getUser().getLat());
                 msj.setCity(this.userData.getUser().getCity());
                 this.conexion.setMensaje(msj);
+                try {
+                    Thread.sleep(1000);
+                    Log.e("Boton evento","DORMIR 100Mls");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 //hacer al connectar
-                tv_texto.setText("@string/disconnect");//en caso de falla solo escribir disconected
-
-                /*
-                 en caso de ser falso
-                 if(condicion ){
-
-                 }
-                Recibe los datos del aeropuerto y de los aeropuertos  que hay que pasar a la siguiente layout
-                 */
-
-
-
-                //paso al segundo layout
-                Intent intent01 =new Intent(MainActivity.this,Second_Activity.class);
-                startActivity(intent01);
+                // INTENTA CONECTAR
+                if(userData.isConnect()){
+                    Intent intent01 = new Intent(MainActivity.this, Second_Activity.class);
+                    startActivity(intent01);
+                }else{
+                    tv_texto.setText("@string/disconnect");//en caso de falla solo escribir disconected
+                }
 
                 break;
 

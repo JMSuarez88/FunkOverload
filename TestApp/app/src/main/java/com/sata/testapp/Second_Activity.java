@@ -10,6 +10,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
+import com.sata.testapp.classes.UserData;
+
 public class Second_Activity extends MainActivity implements View.OnClickListener {
     Button next,change;
 
@@ -21,6 +23,7 @@ public class Second_Activity extends MainActivity implements View.OnClickListene
         change = (Button)findViewById(R.id.bt_change);
         next.setOnClickListener(this);
         change.setOnClickListener(this);
+        UserData.createUserData().setConnect(false);
 
 
     }
