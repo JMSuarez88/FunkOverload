@@ -40,6 +40,8 @@ public class Second_Activity extends MainActivity implements View.OnClickListene
         switch (v.getId()){
             case R.id.bt_next:
                 /* Pasar a layout 4, recibir en la layout 4 el destino */
+                Intent j = new Intent(this, Fourth_Activity.class );
+                startActivity(j);
                 break;
             case R.id.bt_change:
                 Intent i = new Intent(this, Third_Activity.class );

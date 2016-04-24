@@ -44,15 +44,16 @@
         android:layout_weight="0.14" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tv_labelStatus"
-        android:layout_gravity="center_horizontal"
         android:textSize="30dp"
         android:textColor="#00c0c0"
-        android:visibility="invisible"
+        android:text="Comenzar"
         android:textAlignment="center"
-        android:gravity="fill_horizontal" />
+        android:gravity="fill_horizontal"
+        android:layout_gravity="center_horizontal"
+        android:editable="false" />
 
     <!--<TextView
         android:layout_width="fill_parent"
