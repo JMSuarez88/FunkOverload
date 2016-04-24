@@ -51,7 +51,10 @@ public class UserData {
     public void setAirportFrom(Airport airportFrom) {
         this.airportFrom = airportFrom;
     }
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 
     // Airport To
     public Airport getAirportTo() {
