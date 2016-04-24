@@ -6,13 +6,9 @@ import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import com.sata.testapp.classes.Connection;
-import com.sata.testapp.classes.GPS;
-import com.sata.testapp.classes.Send;
-import com.sata.testapp.classes.UserData;
+
 
 public class MainActivity extends AppCompatActivity implements OnClickListener{
     TextView tv_texto;
