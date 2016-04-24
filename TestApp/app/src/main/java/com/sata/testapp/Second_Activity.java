@@ -27,24 +27,12 @@ public class Second_Activity extends MainActivity implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
-
         switch (v.getId()){
             case R.id.bt_next:
-                /*Pasar a layout 4, recibir en la layout 4 el destino,
-
-
-
-                 */
-
+                /* Pasar a layout 4, recibir en la layout 4 el destino */
                 break;
             case R.id.bt_change:
-                /*Pasar a la layout 3 y re celeccionar el destino(list view) luego pasar a layout4
-
-
-
-
-                */
-
+                /* Pasar a la layout 3 y re celeccionar el destino(list view) luego pasar a layout4 */
                 break;
         }
 
